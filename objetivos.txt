@@ -1,0 +1,14 @@
+Criar as seguintes tabelas:
+turma_aluno
+turma_professor
+disciplina_curso
+relacioná-las na tabela turma
+
+A tabela turma irá ter:
+- turno
+- id
+- período
+- curso (id)
+- não lembro o resto
+
+Criar uma turma hipotética com essas tabelas
