@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #023047;
+}
+.row {
+    margin: 0 - 20px;
+    display: flex;
+    justify-content: center;
+  }
+    
+  .column {
+    width: 50%;
+    padding: 0 30px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+    
+    /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+    
+
+  .row:after {
+      content: "";
+      display: table;
+      clear: both;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background: url(../IMAGENS/fundo.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.formCad .row {
+    margin-bottom: 15px;
+}
+
+.formCad .row .col-md-6 {
+    padding: 0 15px;
+}
+
+.formCad .form-label {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+.formCad .form-control {
+    width: 100%;
+}
+
+.formCad .form-check {
+    justify-content: flex-start;
+}
+
+.custom-checkbox-group {
+    display: flex;
+    gap: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.custom-checkbox-input {
+    margin-right: 5px;
+}
+
+
+.formCad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centraliza os elementos verticalmente */
+    justify-content: center;  /* Centraliza os elementos horizontalmente */
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 20px 40px; /* Aumento do padding */
+    margin-bottom: 10px;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra suave */
+    width: 50%; /* Aumento da largura */
+    gap: 10px; /* Aumento do gap */
+    margin-left: auto; /* Adicionado */
+    margin-right: auto; /* Adicionado */
+    text-align: center; /* Adicionado */
+}
+
+
+.formCad h1 {
+    margin-top: 0;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 2.3em;
+}
+
+.formCad p {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.formCad select input {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    transition: all linear 160ms;
+    outline: none;
+}
+
+
+.formCad input:focus {
+    border: 1px solid #a70a0a;
+}
+
+.formCad label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.formCad a {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #555;
+    transition: all linear 160ms;
+}
+
+.formCad a:hover {
+    color: #a70a0a;
+}
+
+.error_message {
+    color: red;
+    font-size: 12px;
+}
+
+.checkmark {
+    display: none;
+    color: red;
+    color: green;
+    font-size: 20px;
+}
+
+#senha_requisitos, #confirm_status {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.requisito {
+    color: red;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+
+
+.btn {
+    background-color: #a70a0a;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none !important;
+    transition: all linear 160ms;
+    cursor: pointer;
+    margin: 0 !important;
+
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #461414;
+
+}
+
+
+.logo {
+    background-image: url('../IMAGENS/logoEdu.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    top: 0px;
+    left: 30px;
+  }
+
+  .logo:hover {
+    background-image: url('../IMAGENS/logoEduHover.png');
+  }
+
+  .etapa-progresso {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin-bottom: 20px;
+}
+.etapa-progresso li {
+    flex-grow: 1;
+    text-align: center;
+    background-color: #ddd;
+    padding: 10px;
+    cursor: pointer;
+}
+.etapa-progresso li.ativo {
+    background-color: #28a745;
+}
+
+
+ 
