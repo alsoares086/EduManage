@@ -1,7 +1,7 @@
 <?php
 
-// Classe VendaMapper
-class VendaMapper
+// Classe TurmaMapper
+class TurmaMapper
 {
     private static $conn;
 
@@ -12,19 +12,24 @@ class VendaMapper
     }
 
     // Método save()
-    public static function save(Venda $venda)
+    public static function save(Turma $turma)
     {
-        $date = date("Y-m-d");
 
-        $sql = "INSERT INTO turma (data_venda) VALUES (:date)";
+
+        $sql = "INSERT INTO turma (id, codigo, turno, periodo, cursoNome) VALUES (:id, :codigo, :turno, :periodo, :cursoNome)";
         $stmt = self::$conn->prepare($sql);
-        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':id', $date);
+        $stmt->bindParam(':codigo', $date);
+        $stmt->bindParam(':periodo', $date);
+        $stmt->bindParam(':periodo', $date);
+        $stmt->bindParam(':cursoNome', $date);
         $stmt->execute();
 
         $id = self::$conn->lastInsertId();
-        $venda->setId($id);
+        $turma->setId($id);
 
-        foreach ($venda->getItens() as $item) {
+        /*
+        foreach ($turma->getItens() as $item) {
             $quantidade = $item[0];
             $produto = $item[1];
             $preco = $produto->preco;
@@ -37,13 +42,13 @@ class VendaMapper
             $stmt->bindParam(':quantidade', $quantidade);
             $stmt->bindParam(':preco', $preco);
             $stmt->execute();
-        }
+        }*/
     }
 
     // Método delete()
     public static function delete($id)
     {
-        $sql = "DELETE FROM venda WHERE id = :id";
+        $sql = "DELETE FROM turma WHERE id = :id";
         $stmt = self::$conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -52,7 +57,7 @@ class VendaMapper
     // Método find()
     public static function find($id)
     {
-        $sql = "SELECT * FROM venda WHERE id = :id";
+        $sql = "SELECT * FROM turma WHERE id = :id";
         $stmt = self::$conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -63,11 +68,14 @@ class VendaMapper
     // Método all()
     public static function all()
     {
-        $sql = "SELECT * FROM venda";
+        $sql = "SELECT * FROM turma";
         $stmt = self::$conn->query($sql);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $data;
+    }//Fim do método all()
+
+   
     }
-}
+
 
 ?>

@@ -64,6 +64,22 @@
             return $data->max;
         }//Fim do método getLastId()
 
+        //Método findNomeCurso
+        public function findNomeCurso($nomeCurso) {
+            $sql = "SELECT idCurso, tipoCurso, turno FROM curso WHERE nomeCurso = :nomeCurso";
+            $stmt = self::$conn->prepare($sql);
+            $stmt->bindValue(':nomeCurso', $nomeCurso);
+            $stmt->execute();
+        
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            if ($result) {
+                return $result['nomeCurso'];
+            } else {
+                return null;
+            }
+        }//fim do método FindNomeCurso()
+
             
     }//Fim da clase CursoGateway
 ?>
