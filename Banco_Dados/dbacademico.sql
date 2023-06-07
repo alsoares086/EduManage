@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/06/2023 às 18:32
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.0.28
+-- Tempo de geração: 08-Jun-2023 às 00:30
+-- Versão do servidor: 10.4.25-MariaDB
+-- versão do PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `administrador`
+-- Estrutura da tabela `administrador`
 --
 
 CREATE TABLE `administrador` (
@@ -32,10 +32,10 @@ CREATE TABLE `administrador` (
   `nome` varchar(60) NOT NULL,
   `matricula` varchar(9) NOT NULL,
   `senha` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `administrador`
+-- Extraindo dados da tabela `administrador`
 --
 
 INSERT INTO `administrador` (`id`, `nome`, `matricula`, `senha`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `administrador` (`id`, `nome`, `matricula`, `senha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `aluno`
+-- Estrutura da tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
@@ -54,19 +54,34 @@ CREATE TABLE `aluno` (
   `nomeAluno` varchar(60) NOT NULL,
   `matriculaAluno` varchar(9) NOT NULL,
   `senhaAluno` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `aluno`
+-- Extraindo dados da tabela `aluno`
 --
 
 INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matriculaAluno`, `senhaAluno`) VALUES
-(1, 'Aluno ', '202301', 'Aluno@123');
+(1, 'Aluno ', '202301', 'Aluno@123'),
+(2, 'Mariazinha', '202302', 'Aluno@123'),
+(3, 'Joaozinho', '202303', 'Aluno@123'),
+(4, 'Josezinho', '202304', 'Aluno@123');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `curso`
+-- Estrutura da tabela `aluno_turma`
+--
+
+CREATE TABLE `aluno_turma` (
+  `id` int(11) NOT NULL,
+  `id_aluno` int(11) NOT NULL,
+  `id_turma` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `curso`
 --
 
 CREATE TABLE `curso` (
@@ -75,10 +90,10 @@ CREATE TABLE `curso` (
   `cargaHorariaCurso` float NOT NULL,
   `tipoCurso` varchar(60) DEFAULT NULL,
   `turno` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `curso`
+-- Extraindo dados da tabela `curso`
 --
 
 INSERT INTO `curso` (`idCurso`, `nomeCurso`, `cargaHorariaCurso`, `tipoCurso`, `turno`) VALUES
@@ -120,17 +135,17 @@ INSERT INTO `curso` (`idCurso`, `nomeCurso`, `cargaHorariaCurso`, `tipoCurso`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `disciplina`
+-- Estrutura da tabela `disciplina`
 --
 
 CREATE TABLE `disciplina` (
   `idDisciplina` int(11) NOT NULL,
   `nomeDisciplina` varchar(60) NOT NULL,
   `cargaHorariaDisciplina` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `disciplina`
+-- Extraindo dados da tabela `disciplina`
 --
 
 INSERT INTO `disciplina` (`idDisciplina`, `nomeDisciplina`, `cargaHorariaDisciplina`) VALUES
@@ -150,7 +165,7 @@ INSERT INTO `disciplina` (`idDisciplina`, `nomeDisciplina`, `cargaHorariaDiscipl
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `professor`
+-- Estrutura da tabela `professor`
 --
 
 CREATE TABLE `professor` (
@@ -160,10 +175,10 @@ CREATE TABLE `professor` (
   `especializacao` varchar(60) NOT NULL,
   `matriculaProfessor` varchar(9) NOT NULL,
   `senhaProfessor` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `professor`
+-- Extraindo dados da tabela `professor`
 --
 
 INSERT INTO `professor` (`idProfessor`, `nomeProfessor`, `escolaridade`, `especializacao`, `matriculaProfessor`, `senhaProfessor`) VALUES
@@ -172,56 +187,71 @@ INSERT INTO `professor` (`idProfessor`, `nomeProfessor`, `escolaridade`, `especi
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `turma`
+-- Estrutura da tabela `turma`
 --
 
 CREATE TABLE `turma` (
   `id` int(11) NOT NULL,
-  `codigo` int(11) NOT NULL,
+  `codigo` varchar(15) NOT NULL,
   `periodo` varchar(15) NOT NULL,
-  `nome` varchar(60) DEFAULT NULL,
-  `curso` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `curso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `turma`
+--
+
+INSERT INTO `turma` (`id`, `codigo`, `periodo`, `curso`) VALUES
+(5, '2023-01', '3', 5),
+(7, '123', '3', 9);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `administrador`
+-- Índices para tabela `administrador`
 --
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `matricula` (`matricula`);
 
 --
--- Índices de tabela `aluno`
+-- Índices para tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`idAluno`),
   ADD UNIQUE KEY `matriculaAluno` (`matriculaAluno`);
 
 --
--- Índices de tabela `curso`
+-- Índices para tabela `aluno_turma`
+--
+ALTER TABLE `aluno_turma`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_aluno` (`id_aluno`),
+  ADD KEY `id_turma` (`id_turma`);
+
+--
+-- Índices para tabela `curso`
 --
 ALTER TABLE `curso`
   ADD PRIMARY KEY (`idCurso`);
 
 --
--- Índices de tabela `disciplina`
+-- Índices para tabela `disciplina`
 --
 ALTER TABLE `disciplina`
   ADD PRIMARY KEY (`idDisciplina`);
 
 --
--- Índices de tabela `professor`
+-- Índices para tabela `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`idProfessor`),
   ADD UNIQUE KEY `matriculaProfessor` (`matriculaProfessor`);
 
 --
--- Índices de tabela `turma`
+-- Índices para tabela `turma`
 --
 ALTER TABLE `turma`
   ADD PRIMARY KEY (`id`),
@@ -229,7 +259,7 @@ ALTER TABLE `turma`
   ADD KEY `curso` (`curso`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -242,7 +272,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `aluno_turma`
+--
+ALTER TABLE `aluno_turma`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `curso`
@@ -266,14 +302,21 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT de tabela `turma`
 --
 ALTER TABLE `turma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `turma`
+-- Limitadores para a tabela `aluno_turma`
+--
+ALTER TABLE `aluno_turma`
+  ADD CONSTRAINT `aluno_turma_ibfk_1` FOREIGN KEY (`id_aluno`) REFERENCES `aluno` (`idAluno`),
+  ADD CONSTRAINT `aluno_turma_ibfk_2` FOREIGN KEY (`id_turma`) REFERENCES `turma` (`id`);
+
+--
+-- Limitadores para a tabela `turma`
 --
 ALTER TABLE `turma`
   ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`curso`) REFERENCES `curso` (`idCurso`);

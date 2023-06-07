@@ -1,6 +1,5 @@
 <?php
 
-require_once "C:\\xampp\htdocs\EduManage\PHP\Classes\Curso.php";
 // Classe TurmaMapper
 class TurmaMapper
 {
@@ -12,31 +11,50 @@ class TurmaMapper
         self::$conn = $conn;
     }
 
-    public static function save(Turma $turma, Curso $curso) {
-
-        $sql = "INSERT INTO turma (codigo, turno, periodo, cursoNome, categoriaCurso, idCurso) VALUES (:codigo, :turno, :periodo, :cursoNome, :categoriaCurso, :idCurso)";
+    
+    /*
+    public static function save(Turma $turma)
+    {
+        $codigo = $turma->getCodigo();
+        $periodo = $turma->getPeriodo();
+        $cursoId = $turma->getCurso()->getId();
+    
+        $sql = "INSERT INTO turma (codigo, periodo, curso) VALUES (:codigo, :periodo, :idCurso)";
         $stmt = self::$conn->prepare($sql);
-        $stmt->bindParam(':codigo', $turma->getCodigo());
-        $stmt->bindParam(':turno', $curso->getTurnoCurso());
-        $stmt->bindParam(':periodo', $turma->getPeriodo());
-        $stmt->bindParam(':cursoNome', $curso->getNomeCurso());
-        $stmt->bindParam(':categoriaCurso', $curso->gettipoCurso());
-        $stmt->bindParam(':idCurso', $curso->getId());
+        $stmt->bindParam(':codigo', $codigo);
+        $stmt->bindParam(':periodo', $periodo);
+        $stmt->bindParam(':idCurso', $cursoId);
         $stmt->execute();
 
-        /*
-            $id = self::$conn->lastInsertId();
-            $turma->setId($id);*/
+    }*/
 
-
-            //USAR A SESSÃO PARA PASSAR PRIMEIRO OS DADOS DO CURSO NELA E DEPOIS 
-            //NA MESMA SESSÃO USAR OS DADOS PARA INSERIR NO CURSO!!!
-            //REFLETINDO, SE EU JÁ TENHO INFORMAÇÕES NA TABELA CURSO, NÃO PRECISO INSERIR NOVAMENTE NA TURMA
-            //SÓ PRECISO ASSOCIAR O CURSO À ELA
-            //AO INVÉS DE NO CURSO TER O TIPO DE TURMA, O TIPO SERÁ EM TURMA
-            //DESSA FORMA NÃO PRECISA TER DOIS CURSOS COM O MESMO NOME E ID's E TURMAS DIFERENTES(TIPOS DE ENSINO)
-            //NO FORMULÁRIO HTML, POSSO COLOCAR OS VALUES COMO OS ID's DOS CURSOS AO INVÉS DO NOME (REFLETINDOadd)
+    public static function save(Turma $turma)
+    {
+        $codigo = $turma->getCodigo();
+        $periodo = $turma->getPeriodo();
+        $cursoId = $turma->getCurso()->getId();
     
+        $sql = "INSERT INTO turma (codigo, periodo, curso) VALUES (:codigo, :periodo, :idCurso)";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bindParam(':codigo', $codigo);
+        $stmt->bindParam(':periodo', $periodo);
+        $stmt->bindParam(':idCurso', $cursoId);
+        $stmt->execute();
+
+        $id = self::$conn->lastInsertId();
+        $turma->setId($id);
+
+        //criar um método para essa parte debaixo pois a Turma já existe
+        foreach ($turma->getAluno() as $estudantes) {
+            
+            $aluno = $turma->getAluno()->getIdAluno();
+
+            $sql = "INSERT INTO aluno_turma (id_aluno, id_turma) VALUES (:id_aluno, :id_turma)";
+            $stmt = self::$conn->prepare($sql);
+            $stmt->bindParam(':id_aluno',$aluno);
+            $stmt->bindParam(':id_turma',$id) ;
+            $stmt->execute();
+        }
     }
     
     // Método delete()

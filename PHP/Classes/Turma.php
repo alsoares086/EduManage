@@ -5,6 +5,7 @@
         private $codigo;
         private $periodo;
         private $curso;
+        private $alunos;
 
         //Método setId()
         public function setId ($id)
@@ -22,7 +23,7 @@
         //Método setCodigo()
         public function setCodigo($codigo)
         {
-            $this->id = $codigo;
+            $this->codigo = $codigo;
         }   //Fim do método setCodigo()
 
         //Método getCodigo()
@@ -35,7 +36,7 @@
         //Método setPeriodo()
         public function setPeriodo ($periodo)
         {
-            $this->codigo = $periodo;
+            $this->periodo = $periodo;
         }   //Fim do método setPeriodo()
 
         //Método getPeriodo()
@@ -44,10 +45,25 @@
             return $this->periodo;
         }   //Fim do método getPeriodo()
 
-        public function setCurso($curso){
+        public function setCurso(Curso $curso)
+        {
             $this->curso = $curso;
         }
-
+        
+        public function getCurso()
+        {
+            return $this->curso;
+        }
+        
+        public function setAluno(Aluno $aluno){
+            $this->alunos[] = array($aluno);
+        }
+        
+        public function getAluno()
+        {
+            return $this->aluno;
+        }
+         
          
     }
 

@@ -46,8 +46,16 @@ class AlunoMapper {
         $stmt = self::$conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $data;
+        $data = $stmt->fetch(PDO::FETCH_OBJ);
+
+        if($data) {
+            $aluno = new Aluno();
+            $aluno->setIdAluno($data->idAluno);
+    
+            return $aluno;
+        } else {
+            return null; 
+        }
     }
 
     // Método all()
