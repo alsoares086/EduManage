@@ -1,7 +1,7 @@
 <?php
 
-require_once "..\Classes\Gateway\CursoGateway.php";
-require_once "..\Classes\Curso.php";
+require_once "../Classes/Mapper/CursoMapper.php";
+require_once "../Classes/Curso.php";
 
 $username = "root";
 $password = "";
@@ -12,28 +12,22 @@ $password = "";
     $turno = $_POST['turno'];
 
     try {
-        $conn = new PDO ('mysql:host=localhost; dbname=dbacademico', $username, $password);
+        $conn = new PDO('mysql:host=localhost;dbname=dbacademico', $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        Curso::setConnection($conn);    
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        CursoGateway::setConnection($conn);
+        CursoMapper::setConnection($conn);
 
         $curso = new Curso();
-        $curso -> nomeCurso = $nomeCurso;
-        $curso -> cargaHorariaCurso = $cargaHoraria;
-        $curso -> tipoCurso = $tipo;
-        $curso -> turno = $turno;
+        $curso->setNomeCurso($nomeCurso);
+        $curso->setCargaHoraria($cargaHoraria);
+        $curso->setTipoCurso($tipo);
+        $curso->setTurnoCurso($turno);
 
-        $curso -> save();
+        CursoMapper::save($curso);
 
-        $Ementa = Curso::all();
-        foreach ($Ementa as $Curso) {
-            echo "Nome do Curso: " . $Curso->nomeCurso . "<br>";
-            echo "Carga Horária:  " . $Curso->cargaHorariaCurso. "<br>";
-            echo "Tipo: " . $Curso->tipoCurso . "<br>";
-        }
+        echo "Curso inserido no Banco!";    
+        
     } catch (Exception $e) {
-        print $e->getMessage();
+        echo $e->getMessage();
     }
 
- ?>
+?>

@@ -1,5 +1,6 @@
 <?php
 
+require_once "C:\\xampp\htdocs\EduManage\PHP\Classes\Curso.php";
 // Classe TurmaMapper
 class TurmaMapper
 {
@@ -11,40 +12,31 @@ class TurmaMapper
         self::$conn = $conn;
     }
 
-    // Método save()
-    public static function save(Turma $turma)
-    {
+    public static function save(Turma $turma, Curso $curso) {
 
-
-        $sql = "INSERT INTO turma (id, codigo, turno, periodo, cursoNome) VALUES (:id, :codigo, :turno, :periodo, :cursoNome)";
+        $sql = "INSERT INTO turma (codigo, turno, periodo, cursoNome, categoriaCurso, idCurso) VALUES (:codigo, :turno, :periodo, :cursoNome, :categoriaCurso, :idCurso)";
         $stmt = self::$conn->prepare($sql);
-        $stmt->bindParam(':id', $date);
-        $stmt->bindParam(':codigo', $date);
-        $stmt->bindParam(':periodo', $date);
-        $stmt->bindParam(':periodo', $date);
-        $stmt->bindParam(':cursoNome', $date);
+        $stmt->bindParam(':codigo', $turma->getCodigo());
+        $stmt->bindParam(':turno', $curso->getTurnoCurso());
+        $stmt->bindParam(':periodo', $turma->getPeriodo());
+        $stmt->bindParam(':cursoNome', $curso->getNomeCurso());
+        $stmt->bindParam(':categoriaCurso', $curso->gettipoCurso());
+        $stmt->bindParam(':idCurso', $curso->getId());
         $stmt->execute();
 
-        $id = self::$conn->lastInsertId();
-        $turma->setId($id);
-
         /*
-        foreach ($turma->getItens() as $item) {
-            $quantidade = $item[0];
-            $produto = $item[1];
-            $preco = $produto->preco;
-            $idProduto = $produto->id;
+            $id = self::$conn->lastInsertId();
+            $turma->setId($id);*/
 
-            $sql = "INSERT INTO item_venda (id_venda, id_produto, quantidade, preco) VALUES (:id, :id_produto, :quantidade, :preco)";
-            $stmt = self::$conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':id_produto', $idProduto);           
-            $stmt->bindParam(':quantidade', $quantidade);
-            $stmt->bindParam(':preco', $preco);
-            $stmt->execute();
-        }*/
+
+            //USAR A SESSÃO PARA PASSAR PRIMEIRO OS DADOS DO CURSO NELA E DEPOIS 
+            //NA MESMA SESSÃO USAR OS DADOS PARA INSERIR NO CURSO!!!
+            //REFLETINDO, SE EU JÁ TENHO INFORMAÇÕES NA TABELA CURSO, NÃO PRECISO INSERIR NOVAMENTE NA TURMA
+            //SÓ PRECISO ASSOCIAR O CURSO À ELA
+            //AO INVÉS DE NO CURSO TER O TIPO DE TURMA, O TIPO SERÁ EM TURMA
+    
     }
-
+    
     // Método delete()
     public static function delete($id)
     {

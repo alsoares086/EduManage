@@ -1,11 +1,10 @@
 <?php
 
     class Turma{
-        private id;
-        private codigo;
-        private turno;
-        private periodo;
-        private curso;
+        private $id;
+        private $codigo;
+        private $periodo;
+        private $curso;
 
         //Método setId()
         public function setId ($id)
@@ -32,18 +31,7 @@
             return $this->codigo;
         }   //Fim do método getCodigo()
 
-        //Método setTurno()
-        public function setTurno ($turno)
-        {
-            $this->codigo = $turno;
-        }   //Fim do método setTurno()
-
-        //Método getTurno()
-        public function getTurno()
-        {
-            return $this->turno;
-        }   //Fim do método getTurno()
-
+       
         //Método setPeriodo()
         public function setPeriodo ($periodo)
         {
@@ -55,6 +43,10 @@
         {
             return $this->periodo;
         }   //Fim do método getPeriodo()
+
+        public function setCurso($curso){
+            $this->curso = $curso;
+        }
 
          
     }
