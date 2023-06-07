@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Jun-2023 às 05:49
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.2.0
+-- Tempo de geração: 07/06/2023 às 18:32
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `administrador`
+-- Estrutura para tabela `administrador`
 --
 
 CREATE TABLE `administrador` (
@@ -35,32 +35,38 @@ CREATE TABLE `administrador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `administrador`
+-- Despejando dados para a tabela `administrador`
 --
 
 INSERT INTO `administrador` (`id`, `nome`, `matricula`, `senha`) VALUES
 (1, 'Beatriz', '2024009', 'Jorge@love'),
-(2, 'Alice', '2023008', 'Teste@123');
+(2, 'Alice', '2023008', 'Teste@123'),
+(6, 'Alicitta', '202110', 'ADM@123');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura para tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
   `idAluno` int(11) NOT NULL,
   `nomeAluno` varchar(60) NOT NULL,
-  `curso` varchar(60) NOT NULL,
-  `tipoCurso` varchar(60) NOT NULL,
   `matriculaAluno` varchar(9) NOT NULL,
   `senhaAluno` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `aluno`
+--
+
+INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matriculaAluno`, `senhaAluno`) VALUES
+(1, 'Aluno ', '202301', 'Aluno@123');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `curso`
+-- Estrutura para tabela `curso`
 --
 
 CREATE TABLE `curso` (
@@ -72,7 +78,7 @@ CREATE TABLE `curso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `curso`
+-- Despejando dados para a tabela `curso`
 --
 
 INSERT INTO `curso` (`idCurso`, `nomeCurso`, `cargaHorariaCurso`, `tipoCurso`, `turno`) VALUES
@@ -114,7 +120,7 @@ INSERT INTO `curso` (`idCurso`, `nomeCurso`, `cargaHorariaCurso`, `tipoCurso`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `disciplina`
+-- Estrutura para tabela `disciplina`
 --
 
 CREATE TABLE `disciplina` (
@@ -124,7 +130,7 @@ CREATE TABLE `disciplina` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `disciplina`
+-- Despejando dados para a tabela `disciplina`
 --
 
 INSERT INTO `disciplina` (`idDisciplina`, `nomeDisciplina`, `cargaHorariaDisciplina`) VALUES
@@ -144,7 +150,7 @@ INSERT INTO `disciplina` (`idDisciplina`, `nomeDisciplina`, `cargaHorariaDiscipl
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `professor`
+-- Estrutura para tabela `professor`
 --
 
 CREATE TABLE `professor` (
@@ -156,46 +162,25 @@ CREATE TABLE `professor` (
   `senhaProfessor` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `professor`
+--
+
+INSERT INTO `professor` (`idProfessor`, `nomeProfessor`, `escolaridade`, `especializacao`, `matriculaProfessor`, `senhaProfessor`) VALUES
+(1, 'Silvana', 'Mestre', 'Estatística', '202302', 'Docente@1233');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `turma`
+-- Estrutura para tabela `turma`
 --
 
 CREATE TABLE `turma` (
   `id` int(11) NOT NULL,
   `codigo` int(11) NOT NULL,
-  `turno` varchar(12) NOT NULL,
   `periodo` varchar(15) NOT NULL,
-  `cursoNome` varchar(60) DEFAULT NULL,
-  `idCurso` int(11) DEFAULT NULL,
-  `categoriaCurso` varchar(60) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `turma_aluno`
---
-
-CREATE TABLE `turma_aluno` (
-  `id` int(11) NOT NULL,
-  `turma_id` int(11) DEFAULT NULL,
-  `aluno_id` int(11) DEFAULT NULL,
-  `curso_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `turma_professor`
---
-
-CREATE TABLE `turma_professor` (
-  `id` int(11) NOT NULL,
-  `turma_id` int(11) DEFAULT NULL,
-  `professor_id` int(11) DEFAULT NULL,
-  `curso_id` int(11) DEFAULT NULL
+  `nome` varchar(60) DEFAULT NULL,
+  `curso` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -203,78 +188,61 @@ CREATE TABLE `turma_professor` (
 --
 
 --
--- Índices para tabela `administrador`
+-- Índices de tabela `administrador`
 --
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `matricula` (`matricula`);
 
 --
--- Índices para tabela `aluno`
+-- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`idAluno`),
   ADD UNIQUE KEY `matriculaAluno` (`matriculaAluno`);
 
 --
--- Índices para tabela `curso`
+-- Índices de tabela `curso`
 --
 ALTER TABLE `curso`
   ADD PRIMARY KEY (`idCurso`);
 
 --
--- Índices para tabela `disciplina`
+-- Índices de tabela `disciplina`
 --
 ALTER TABLE `disciplina`
   ADD PRIMARY KEY (`idDisciplina`);
 
 --
--- Índices para tabela `professor`
+-- Índices de tabela `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`idProfessor`),
   ADD UNIQUE KEY `matriculaProfessor` (`matriculaProfessor`);
 
 --
--- Índices para tabela `turma`
+-- Índices de tabela `turma`
 --
 ALTER TABLE `turma`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codigo` (`codigo`);
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `curso` (`curso`);
 
 --
--- Índices para tabela `turma_aluno`
---
-ALTER TABLE `turma_aluno`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `turma_id` (`turma_id`),
-  ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `curso_id` (`curso_id`);
-
---
--- Índices para tabela `turma_professor`
---
-ALTER TABLE `turma_professor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `turma_id` (`turma_id`),
-  ADD KEY `professor_id` (`professor_id`),
-  ADD KEY `curso_id` (`curso_id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `curso`
@@ -292,7 +260,7 @@ ALTER TABLE `disciplina`
 -- AUTO_INCREMENT de tabela `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `idProfessor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idProfessor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `turma`
@@ -301,36 +269,14 @@ ALTER TABLE `turma`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `turma_aluno`
---
-ALTER TABLE `turma_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `turma_professor`
---
-ALTER TABLE `turma_professor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `turma_aluno`
+-- Restrições para tabelas `turma`
 --
-ALTER TABLE `turma_aluno`
-  ADD CONSTRAINT `turma_aluno_ibfk_1` FOREIGN KEY (`turma_id`) REFERENCES `turma` (`id`),
-  ADD CONSTRAINT `turma_aluno_ibfk_2` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`idAluno`),
-  ADD CONSTRAINT `turma_aluno_ibfk_3` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`idCurso`);
-
---
--- Limitadores para a tabela `turma_professor`
---
-ALTER TABLE `turma_professor`
-  ADD CONSTRAINT `turma_professor_ibfk_1` FOREIGN KEY (`turma_id`) REFERENCES `turma` (`id`),
-  ADD CONSTRAINT `turma_professor_ibfk_2` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`idProfessor`),
-  ADD CONSTRAINT `turma_professor_ibfk_3` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`idCurso`);
+ALTER TABLE `turma`
+  ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`curso`) REFERENCES `curso` (`idCurso`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
