@@ -12,9 +12,8 @@ session_start();
         $_SESSION['codigo'] = $codigo;
         $_SESSION['cursoSelecionado'] = $cursoSelecionado;
 
-        var_dump($cursoSelecionado);
-
-        header('Location: ..\cadastroAlunosTurma.html');
+ 
+        header('Location: ..\..\cadastroAlunosTurma.html');
     }catch(Exception $e){
         print $e->getMessage();
     }
