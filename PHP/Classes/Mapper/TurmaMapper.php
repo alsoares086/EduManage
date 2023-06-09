@@ -44,18 +44,7 @@ class TurmaMapper
         $id = self::$conn->lastInsertId();
         $turma->setId($id);
 
-        //criar um método para essa parte debaixo pois a Turma já existe
-        foreach ($turma->getAluno() as $estudantes) {
-            
-            $aluno = $turma->getAluno()->getIdAluno();
-
-            $sql = "INSERT INTO aluno_turma (id_aluno, id_turma) VALUES (:id_aluno, :id_turma)";
-            $stmt = self::$conn->prepare($sql);
-            $stmt->bindParam(':id_aluno',$aluno);
-            $stmt->bindParam(':id_turma',$id) ;
-            $stmt->execute();
-        }
-    }
+   }
     
     // Método delete()
     public static function delete($id)
@@ -86,8 +75,40 @@ class TurmaMapper
         return $data;
     }//Fim do método all()
 
-   
+    public static function addAlunosToTurma(Turma $turma){
+    $alunos = $turma->getAluno(); // Obtem os alunos selecionados
+    $turmaId = $turma->getId(); // Obtém o ID da turma
+    
+    foreach ($alunos as $aluno) {
+        $alunoId = $aluno->getIdAluno(); // Obtém o ID do aluno
+    
+        $sql = "INSERT INTO aluno_turma (id_aluno, id_turma) VALUES (:id_aluno, :id_turma)";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bindParam(':id_aluno', $alunoId);
+        $stmt->bindParam(':id_turma', $turmaId);
+        $stmt->execute();
     }
+}
 
+    /*
+    public static function addAlunosToTurma(Turma $turma)
+    {
+        $alunos = $turma->getAluno();
+        $turmaId = $turma->getId(); // Obtém o ID da turma
+    
+        foreach ($alunos as $alunoArray) {
+            $aluno = $alunoArray[0]; // Obtém o objeto Aluno do array
+    
+            $alunoId = $aluno->getIdAluno();
+    
+            $sql = "INSERT INTO aluno_turma (id_aluno, id_turma) VALUES (:id_aluno, :id_turma)";
+            $stmt = self::$conn->prepare($sql);
+            $stmt->bindParam(':id_aluno', $alunoId);
+            $stmt->bindParam(':id_turma', $turmaId);
+            $stmt->execute();
+        }
+    }*/
+    
+}
 
 ?>

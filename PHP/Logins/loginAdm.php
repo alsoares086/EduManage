@@ -19,7 +19,7 @@ try {
 
     if (AdministradorMapper::autenticacao($matricula, $senha)) {
 
-        echo "Login bem-sucedido!";
+        header('Location: ../../homeAdm.html');
     } else {
 
         header('Location: ../../loginAdm.html');

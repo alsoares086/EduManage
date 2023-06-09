@@ -23,7 +23,7 @@
             <div class="logo"></div>
         </a>
 
-        <form class="formCad" method="POST" action="PHP/Cadastros/cadastrarProfessor.php">
+        <form class="formCad" method="post" action="php/Cadastros/cadastrarProfessor.php">
             <!-- CONECTAR COM O ARQUIVO PHP -->
 
             <h1>Cadastro de Professor</h1>
@@ -105,9 +105,9 @@
             <!-- Terceira Etapa -->
             <div id="etapa3" class="etapa" style="display: none;">
 
-                <label for="usuario" class="form-label">Matrícula do professor: </label>
-                <input type="text" id="matricula" name="matricula" class="form-control"
-                    placeholder="Digite a matrícula" required>
+                <label for="usuario" class="form-label">Nome de usuário: </label>
+                <input type="text" id="usuario" name="usuario" class="form-control"
+                    placeholder="Digite o nome de usuário" required>
                 <div id="usuario_error" class="error"></div>
                 <div id="usuario_check" class="checkmark">&#10004;</div>
 
