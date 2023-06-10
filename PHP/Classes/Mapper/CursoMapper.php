@@ -78,5 +78,13 @@ class CursoMapper {
     
         return null; // Curso não encontrado
     }
+
+    public static function allCursos()
+{
+    $sql = "SELECT * FROM curso";
+    $stmt = self::$conn->query($sql);
+    $cursos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $cursos;
+}
 }    
 ?>

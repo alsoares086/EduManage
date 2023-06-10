@@ -233,6 +233,10 @@ body {
     background-color: #28a745;
 }
 
+.curso-label {
+    margin-left: 5px;
+}  
+
 @media (max-width: 576px) {
     .formCad {
       width: 90%;

@@ -7,7 +7,7 @@
 
     $nome = $_POST['nome'];
     $cargaHoraria = $_POST['cargaHoraria'];
-    $curso = $_POST['curso'];
+    $curso = $_POST['cursos'];
 
     foreach ($curso as $cursosSelecionados) {
         $_SESSION['cursos'][] = $cursosSelecionados;
